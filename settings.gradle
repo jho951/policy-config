@@ -1,0 +1,3 @@
+rootProject.name = 'policy-config'
+
+include 'api','core','config'
