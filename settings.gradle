@@ -1,3 +1,3 @@
 rootProject.name = 'policy-config'
 
-include 'api','core','config'
+include 'api','core','config','spring','example'

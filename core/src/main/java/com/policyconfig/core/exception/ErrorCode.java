@@ -12,7 +12,8 @@ public enum ErrorCode {
 	REQUIRED_POLICY_MISSING("POLICY001", "필수 정책 값이 없습니다."),
 	INVALID_POLICY_VALUE("POLICY002", "정책 값 파싱에 실패했습니다."),
 	UNSUPPORTED_POLICY_TYPE("POLICY003", "지원하지 않는 정책 타입입니다."),
-	SOURCE_LOAD_FAILED("POLICY004", "정책 소스 로딩에 실패했습니다.");
+	SOURCE_LOAD_FAILED("POLICY004", "정책 소스 로딩에 실패했습니다."),
+	SOURCE_WATCH_FAILED("POLICY005", "정책 소스 변경 감시에 실패했습니다.");
 
 	private final String code;
 	private final String defaultMessage;

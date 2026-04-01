@@ -1,0 +1,80 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.jho951",
+    "module": "policy-config-api",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "policy-config-api-1.0.0.jar",
+          "url": "policy-config-api-1.0.0.jar",
+          "size": 12773,
+          "sha512": "e8c81a6b93ad9bd57a1f5f7f95fb41b4ec77c12658af6db6203b655f0b20328722f74d6a12f3dc83d3a9945738a3ada6f8496e3c1bfed8994c85004ca2ee2d4d",
+          "sha256": "f0bfa273cee8aa588e597bfdca0464759b09e1d13327e8a5fbb596c7dd281600",
+          "sha1": "4973f000cfc25a4693bdfe0ac8ccc5d213f38f26",
+          "md5": "25efdb9c50b3f26aec9e9c12649c8ba0"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "policy-config-api-1.0.0.jar",
+          "url": "policy-config-api-1.0.0.jar",
+          "size": 12773,
+          "sha512": "e8c81a6b93ad9bd57a1f5f7f95fb41b4ec77c12658af6db6203b655f0b20328722f74d6a12f3dc83d3a9945738a3ada6f8496e3c1bfed8994c85004ca2ee2d4d",
+          "sha256": "f0bfa273cee8aa588e597bfdca0464759b09e1d13327e8a5fbb596c7dd281600",
+          "sha1": "4973f000cfc25a4693bdfe0ac8ccc5d213f38f26",
+          "md5": "25efdb9c50b3f26aec9e9c12649c8ba0"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "policy-config-api-1.0.0-sources.jar",
+          "url": "policy-config-api-1.0.0-sources.jar",
+          "size": 6349,
+          "sha512": "70fb29fdbfe564a9777912a83193ac235ff15d7ac579ad3690bd61224d0beac35b6244292b0ad5b2b43e6f0f4243c62101e0b0e242069071bafa76a26ff2d1b6",
+          "sha256": "50d9f2741ab79d2adee7d264d78b0158eff9dfb049b47b9e4b7b0d575f2f7d87",
+          "sha1": "e90d28deb8b252502bc6dd03c86d97427dd274d5",
+          "md5": "80eb8fc158b478fc0074afe1c569440b"
+        }
+      ]
+    }
+  ]
+}

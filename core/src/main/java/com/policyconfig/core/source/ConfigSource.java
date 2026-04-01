@@ -13,4 +13,11 @@ public interface ConfigSource {
 	 * key 충돌이 있을 경우, 나중에 합치는 쪽에서 우선순위를 정한다.
 	 */
 	Map<String, String> load();
+
+	/**
+	 * 소스의 식별자. 기본값은 클래스 단순 이름이다.
+	 */
+	default String name() {
+		return getClass().getSimpleName();
+	}
 }

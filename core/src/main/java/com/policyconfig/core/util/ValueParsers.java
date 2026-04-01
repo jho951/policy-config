@@ -3,6 +3,8 @@ package com.policyconfig.core.util;
 import com.policyconfig.core.exception.ErrorCode;
 import com.policyconfig.core.exception.PolicyConfigException;
 
+import java.util.Locale;
+
 public final class ValueParsers {
 
 	private ValueParsers() {
@@ -30,7 +32,7 @@ public final class ValueParsers {
 		if (raw == null) {
 			return null;
 		}
-		String lower = raw.toLowerCase();
+		String lower = raw.toLowerCase(Locale.ROOT);
 		if ("true".equals(lower) || "1".equals(lower) || "yes".equals(lower) || "y".equals(lower)) {
 			return Boolean.TRUE;
 		}

@@ -1,0 +1,23 @@
+apply plugin: 'application'
+
+application {
+    mainClass = 'com.policyconfig.example.ExampleApplication'
+}
+
+dependencies {
+    implementation project(':spring')
+    implementation project(':core')
+    implementation platform('org.springframework.boot:spring-boot-dependencies:4.0.3')
+    implementation 'org.springframework.boot:spring-boot'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    testImplementation platform('org.springframework.boot:spring-boot-dependencies:4.0.3')
+    testImplementation 'org.springframework.boot:spring-boot-test'
+    testImplementation 'org.springframework.boot:spring-boot-autoconfigure'
+    testImplementation 'org.springframework:spring-context'
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}

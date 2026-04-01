@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: policy-config-example
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,policy-config
+  endpoint:
+    health:
+      show-details: always
+
+policy:
+  config:
+    reloadable: true
+    prefix: ""
+
+example:
+  feature:
+    enabled: true
+  api:
+    token: example-secret-token

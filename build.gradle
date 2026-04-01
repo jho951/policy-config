@@ -1,6 +1,10 @@
+plugins {
+    id "com.vanniktech.maven.publish" version "0.36.0" apply false
+}
+
 allprojects {
     group = "io.github.jho951"
-    version = "1.0.0"
+    version = findProperty("VERSION_NAME") ?: "1.0.0"
 
     repositories {
         mavenCentral()
@@ -8,10 +12,29 @@ allprojects {
     }
 }
 
+ext {
+    publishingCoordinates = [
+        api   : "policy-config-api",
+        core  : "policy-config-core",
+        config: "policy-config-config",
+        spring: "policy-config-spring-boot-starter"
+    ]
+    publishingDescriptions = [
+        api   : "Public API for policy key definitions and resolution.",
+        core  : "Core policy resolution engine and config source implementations.",
+        config: "Convenience builder and assembly utilities for policy resolution.",
+        spring: "Spring Boot starter, auto-configuration, and Actuator endpoint."
+    ]
+    publishingName = "policy-config"
+    publishingUrl = "https://github.com/jho951/policy-config"
+    publishingScm = "scm:git:git://github.com/jho951/policy-config.git"
+    publishingDeveloperConnection = "scm:git:ssh://git@github.com/jho951/policy-config.git"
+    publishingLicenseName = "The Apache License, Version 2.0"
+    publishingLicenseUrl = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+}
 
 subprojects {
     apply plugin: "java-library"
-    apply plugin: "maven-publish"
 
     java {
         toolchain {
@@ -23,23 +46,42 @@ subprojects {
         options.release = 17
     }
 
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
-                artifactId = "policy-config-${project.name}"
-            }
-        }
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/jho951/policy-config")
-                credentials {
-                    username = findProperty("githubUsername")
-                    password = findProperty("githubToken")
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+    }
+
+    if (rootProject.ext.publishingCoordinates.containsKey(project.name)) {
+        apply plugin: "com.vanniktech.maven.publish"
+
+        mavenPublishing {
+            coordinates(group.toString(), rootProject.ext.publishingCoordinates[project.name].toString(), version.toString())
+            publishToMavenCentral(true)
+            signAllPublications()
+
+            pom {
+                name = rootProject.ext.publishingName
+                description = rootProject.ext.publishingDescriptions[project.name].toString()
+                url = rootProject.ext.publishingUrl
+                licenses {
+                    license {
+                        name = rootProject.ext.publishingLicenseName
+                        url = rootProject.ext.publishingLicenseUrl
+                        distribution = rootProject.ext.publishingLicenseUrl
+                    }
+                }
+                scm {
+                    url = rootProject.ext.publishingUrl
+                    connection = rootProject.ext.publishingScm
+                    developerConnection = rootProject.ext.publishingDeveloperConnection
+                }
+                developers {
+                    developer {
+                        id = "jho951"
+                        name = "Jhon S"
+                        url = "https://github.com/jho951"
+                    }
                 }
             }
         }
-
     }
 }

@@ -1,12 +1,15 @@
 package com.policyconfig.config;
 
 import com.policyconfig.api.PolicyResolver;
+import com.policyconfig.api.PolicyValueConverter;
 import com.policyconfig.core.source.ConfigSource;
 import com.policyconfig.core.source.DefaultPolicyResolver;
 import com.policyconfig.core.source.EnvConfigSource;
 import com.policyconfig.core.source.MapConfigSource;
+import com.policyconfig.core.source.PolicyConverterRegistry;
 import com.policyconfig.core.source.PropertiesConfigSource;
 import com.policyconfig.core.source.PropertiesFileConfigSource;
+import com.policyconfig.core.source.ReloadablePolicyResolver;
 import com.policyconfig.core.source.SystemPropertyConfigSource;
 
 import java.nio.file.Path;
@@ -42,6 +45,8 @@ public final class PolicyConfigs {
 
 	public static final class Builder {
 		private final List<ConfigSource> sources = new ArrayList<>();
+		private final PolicyConverterRegistry converterRegistry = new PolicyConverterRegistry();
+		private boolean reloadable;
 
 		/** 환경변수(System.getenv) */
 		public Builder env() {
@@ -79,8 +84,30 @@ public final class PolicyConfigs {
 			return this;
 		}
 
+		public <T> Builder converter(Class<T> type, PolicyValueConverter<T> converter) {
+			converterRegistry.register(type, converter);
+			return this;
+		}
+
+		public Builder converters(Iterable<? extends PolicyConverterRegistry.RegisteredConverter<?>> converters) {
+			converterRegistry.registerAll(converters);
+			return this;
+		}
+
+		public Builder reloadable() {
+			this.reloadable = true;
+			return this;
+		}
+
+		public ReloadablePolicyResolver buildReloadable() {
+			return new ReloadablePolicyResolver(sources, converterRegistry);
+		}
+
 		public PolicyResolver build() {
-			return new DefaultPolicyResolver(sources);
+			if (reloadable) {
+				return buildReloadable();
+			}
+			return new DefaultPolicyResolver(sources, converterRegistry);
 		}
 	}
 }
