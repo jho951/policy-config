@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.policyconfig.core.source.PropertiesFileAutoRefreshTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-01T04:46:49.154Z" hostname="jhonui-MacBookPro-2.local" time="1.053">
-  <properties/>
-  <testcase name="reloadsAutomaticallyWhenFileChanges()" classname="com.policyconfig.core.source.PropertiesFileAutoRefreshTest" time="1.053"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
