@@ -7,17 +7,17 @@ application {
 dependencies {
     implementation project(':spring-boot-starter')
     implementation project(':resolver-core')
-    implementation platform('org.springframework.boot:spring-boot-dependencies:4.0.3')
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${rootProject.ext.springBootVersion}")
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-    testImplementation platform('org.springframework.boot:spring-boot-dependencies:4.0.3')
+    testImplementation platform("org.springframework.boot:spring-boot-dependencies:${rootProject.ext.springBootVersion}")
     testImplementation 'org.springframework.boot:spring-boot-test'
     testImplementation 'org.springframework.boot:spring-boot-autoconfigure'
     testImplementation 'org.springframework:spring-context'
     testImplementation 'org.assertj:assertj-core'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation "org.junit.jupiter:junit-jupiter:${rootProject.ext.junitVersion}"
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

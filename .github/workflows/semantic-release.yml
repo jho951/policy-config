@@ -34,7 +34,7 @@ jobs:
 
       - name: Read release metadata
         run: |
-          echo "VERSION_NAME=$(cut -d= -f2 build/semantic-release-version.txt)" >> "$GITHUB_ENV"
+          echo "VERSION=$(cut -d= -f2 build/semantic-release-version.txt)" >> "$GITHUB_ENV"
           echo "RELEASE_NEEDED=$(cut -d= -f2 build/semantic-release-needed.txt)" >> "$GITHUB_ENV"
 
       - name: Open release pull request
@@ -42,10 +42,10 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ github.token }}
-          branch: release/v${{ env.VERSION_NAME }}
+          branch: release/v${{ env.VERSION }}
           delete-branch: true
-          title: chore(release): v${{ env.VERSION_NAME }}
-          commit-message: chore(release): v${{ env.VERSION_NAME }}
+          title: chore(release): v${{ env.VERSION }}
+          commit-message: chore(release): v${{ env.VERSION }}
           body-path: build/semantic-release-notes.md
           labels: release
           signoff: false

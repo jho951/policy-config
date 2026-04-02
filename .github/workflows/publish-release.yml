@@ -25,10 +25,10 @@ jobs:
           cache: gradle
 
       - name: Read version
-        run: echo "VERSION_NAME=$(grep '^VERSION_NAME=' gradle.properties | cut -d= -f2)" >> "$GITHUB_ENV"
+        run: echo "VERSION=$(grep '^version=' gradle.properties | cut -d= -f2)" >> "$GITHUB_ENV"
 
       - name: Publish to Maven Central
-        run: ./gradlew publishToMavenCentral --no-daemon -PVERSION_NAME="$VERSION_NAME"
+        run: ./gradlew publishToMavenCentral --no-daemon -Pversion="$VERSION"
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
@@ -39,12 +39,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag "v${VERSION_NAME}"
-          git push origin "v${VERSION_NAME}"
+          git tag "v${VERSION}"
+          git push origin "v${VERSION}"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.VERSION_NAME }}
-          name: v${{ env.VERSION_NAME }}
+          tag_name: v${{ env.VERSION }}
+          name: v${{ env.VERSION }}
           generate_release_notes: true

@@ -30,10 +30,10 @@ jobs:
         run: ./gradlew clean test
 
       - name: Set version
-        run: echo "VERSION_NAME=${{ inputs.version }}" >> "$GITHUB_ENV"
+        run: echo "VERSION=${{ inputs.version }}" >> "$GITHUB_ENV"
 
       - name: Publish to Maven Central
-        run: ./gradlew publishToMavenCentral --no-daemon -PVERSION_NAME="$VERSION_NAME"
+        run: ./gradlew publishToMavenCentral --no-daemon -Pversion="$VERSION"
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
@@ -44,8 +44,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag "v${VERSION_NAME}"
-          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "v${VERSION_NAME}"
+          git tag "v${VERSION}"
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "v${VERSION}"
         env:
           GITHUB_TOKEN: ${{ github.token }}
 

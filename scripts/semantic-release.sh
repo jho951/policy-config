@@ -14,7 +14,7 @@ fi
 
 records="$(git log ${range:+$range} --reverse --format='%s%x1f%b%x1e')"
 if [[ -z "${records}" ]]; then
-  echo "VERSION_NAME=${base_version}" > build/semantic-release-version.txt
+  echo "version=${base_version}" > build/semantic-release-version.txt
   echo "RELEASE_NEEDED=false" > build/semantic-release-needed.txt
   printf '# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n## Unreleased\n\n' > build/semantic-release-notes.md
   exit 0
@@ -50,7 +50,7 @@ while IFS= read -r -d $'\x1e' record; do
 done < <(printf '%s' "${records}")
 
 if [[ "${major}" -eq 0 && "${minor}" -eq 0 && "${patch}" -eq 0 ]]; then
-  echo "VERSION_NAME=${base_version}" > build/semantic-release-version.txt
+  echo "version=${base_version}" > build/semantic-release-version.txt
   echo "RELEASE_NEEDED=false" > build/semantic-release-needed.txt
   printf '# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n## Unreleased\n\n' > build/semantic-release-notes.md
   exit 0
@@ -78,15 +78,15 @@ next_tag="v${next_version}"
 tmp_version="$(mktemp)"
 awk -v version="${next_version}" '
   BEGIN { found = 0 }
-  /^VERSION_NAME=/ {
-    print "VERSION_NAME=" version
+  /^version=/ {
+    print "version=" version
     found = 1
     next
   }
   { print }
   END {
     if (!found) {
-      print "VERSION_NAME=" version
+      print "version=" version
     }
   }
 ' gradle.properties > "${tmp_version}"
@@ -124,5 +124,5 @@ notes_file="build/semantic-release-notes.md"
 mv "${notes_file}.tmp" "${notes_file}"
 cp "${notes_file}" CHANGELOG.md
 
-echo "VERSION_NAME=${next_version}" > build/semantic-release-version.txt
+echo "version=${next_version}" > build/semantic-release-version.txt
 echo "RELEASE_NEEDED=true" > build/semantic-release-needed.txt

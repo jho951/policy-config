@@ -53,7 +53,7 @@ dependencies {
 - `semantic-release` 워크플로는 `main`에 push되면 릴리즈 PR을 엽니다.
 - `publish-release` 워크플로는 릴리즈 PR이 머지되면 Maven Central 배포와 태그 생성, GitHub Release 생성을 수행합니다.
 - 필요한 시크릿은 `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD`, `MAVEN_CENTRAL_GPG_PRIVATE_KEY`, `MAVEN_CENTRAL_GPG_PASSPHRASE` 입니다.
-- 로컬 릴리즈는 `./gradlew publishToMavenCentral -PVERSION_NAME=1.0.0` 로 수행할 수 있습니다.
+- 로컬 릴리즈는 `./gradlew publishToMavenCentral -Pversion=1.0.0` 로 수행할 수 있습니다.
 - `ci.yml`은 PR과 `main` 푸시에서 테스트를 돌립니다.
 - `commit-lint.yml`은 PR 커밋 메시지가 conventional commit 규칙을 따르는지 검사합니다.
 - 릴리즈 PR 커밋은 `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, `style`, `revert` 형식이어야 합니다.

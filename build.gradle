@@ -1,28 +1,22 @@
-    plugins {
-        id "com.vanniktech.maven.publish" version "0.36.0" apply false
-    }
-
-allprojects {
-    group = "io.github.jho951"
-    version = findProperty("VERSION_NAME") ?: "1.0.0"
-
-    repositories {
-        mavenCentral()
-        mavenLocal()
-    }
+plugins {
+    id "com.vanniktech.maven.publish" version "0.36.0" apply false
 }
 
 ext {
+    javaVersion = (findProperty("java_version") ?: "17").toString().toInteger()
+    junitVersion = findProperty("junit_version") ?: "5.10.0"
+    springBootVersion = findProperty("spring_boot_version") ?: "3.3.5"
+    sourceEncoding = findProperty("encoding") ?: "UTF-8"
     publishingCoordinates = [
-        contracts     : "policy-config-contracts",
+        contracts: "policy-config-contracts",
         "resolver-core": "policy-config-resolver-core",
-        builder       : "policy-config-builder",
+        builder: "policy-config-builder",
         "spring-boot-starter": "policy-config-spring-boot-starter"
     ]
     publishingDescriptions = [
-        contracts     : "Public contracts for typed policy value lookup.",
+        contracts: "Public contracts for typed policy value lookup.",
         "resolver-core": "Core policy value resolver and config sources.",
-        builder       : "Builder and assembly utilities for policy value lookup.",
+        builder: "Builder and assembly utilities for policy value lookup.",
         "spring-boot-starter": "Spring Boot starter and Actuator endpoint for policy value lookup."
     ]
     publishingName = "policy-config"
@@ -33,17 +27,28 @@ ext {
     publishingLicenseUrl = "https://www.apache.org/licenses/LICENSE-2.0.txt"
 }
 
+allprojects {
+    group = "io.github.jho951"
+    version = findProperty("version") ?: "1.0.0"
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
 subprojects {
     apply plugin: "java-library"
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
+            languageVersion = JavaLanguageVersion.of(rootProject.ext.javaVersion)
         }
     }
 
     tasks.withType(JavaCompile).configureEach {
-        options.release = 17
+        options.release = rootProject.ext.javaVersion
+        options.encoding = rootProject.ext.sourceEncoding.toString()
     }
 
     tasks.withType(Test).configureEach {
