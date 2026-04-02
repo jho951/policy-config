@@ -5,8 +5,8 @@ application {
 }
 
 dependencies {
-    implementation project(':spring')
-    implementation project(':core')
+    implementation project(':spring-boot-starter')
+    implementation project(':resolver-core')
     implementation platform('org.springframework.boot:spring-boot-dependencies:4.0.3')
     implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'

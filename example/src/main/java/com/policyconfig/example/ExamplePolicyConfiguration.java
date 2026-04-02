@@ -1,8 +1,8 @@
 package com.policyconfig.example;
 
-import com.policyconfig.api.PolicyKey;
-import com.policyconfig.core.source.ConfigSource;
-import com.policyconfig.spring.PolicyKeyBean;
+import com.policyconfig.contracts.PolicyKey;
+import com.policyconfig.resolvercore.source.ConfigSource;
+import com.policyconfig.springbootstarter.PolicyKeyBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

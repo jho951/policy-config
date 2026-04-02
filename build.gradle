@@ -1,6 +1,6 @@
-plugins {
-    id "com.vanniktech.maven.publish" version "0.36.0" apply false
-}
+    plugins {
+        id "com.vanniktech.maven.publish" version "0.36.0" apply false
+    }
 
 allprojects {
     group = "io.github.jho951"
@@ -14,16 +14,16 @@ allprojects {
 
 ext {
     publishingCoordinates = [
-        api   : "policy-config-api",
-        core  : "policy-config-core",
-        config: "policy-config-config",
-        spring: "policy-config-spring-boot-starter"
+        contracts     : "policy-config-contracts",
+        "resolver-core": "policy-config-resolver-core",
+        builder       : "policy-config-builder",
+        "spring-boot-starter": "policy-config-spring-boot-starter"
     ]
     publishingDescriptions = [
-        api   : "Public API for policy key definitions and resolution.",
-        core  : "Core policy resolution engine and config source implementations.",
-        config: "Convenience builder and assembly utilities for policy resolution.",
-        spring: "Spring Boot starter, auto-configuration, and Actuator endpoint."
+        contracts     : "Public contracts for typed policy value lookup.",
+        "resolver-core": "Core policy value resolver and config sources.",
+        builder       : "Builder and assembly utilities for policy value lookup.",
+        "spring-boot-starter": "Spring Boot starter and Actuator endpoint for policy value lookup."
     ]
     publishingName = "policy-config"
     publishingUrl = "https://github.com/jho951/policy-config"

@@ -9,9 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/api" />
-            <option value="$PROJECT_DIR$/config" />
-            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/builder" />
+            <option value="$PROJECT_DIR$/contracts" />
+            <option value="$PROJECT_DIR$/example" />
+            <option value="$PROJECT_DIR$/resolver-core" />
+            <option value="$PROJECT_DIR$/spring-boot-starter" />
           </set>
         </option>
       </GradleProjectSettings>

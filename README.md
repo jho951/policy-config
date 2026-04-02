@@ -1,13 +1,31 @@
 # policy-config
 
-`policy-config`는 **환경변수 / System Properties / .properties / Map** 등 여러 소스에 흩어진 값을  
-`PolicyKey<T>`로 **타입 안전하게 조회**하기 위한 공통 모듈입니다.
+`policy-config`는 1계층에서 **정책 값 조회/해석 OSS**입니다.
+환경변수 / System Properties / `.properties` / `Map` 등 여러 소스에 흩어진 값을 `PolicyKey<T>` 기준으로 타입 안전하게 읽고,
+기본값, 별칭, 검증, 변환, 출처 정보를 포함해 해석합니다.
 
-- **api**: `PolicyKey`, `PolicyResolver`
-- **core**: `ConfigSource`, 기본 소스(Env/Properties/Map), `DefaultPolicyResolver`, `ReloadablePolicyResolver`
-- **config**: 조립(구성) 유틸 `PolicyConfigs` (일반적으로 이 모듈을 의존하면 편합니다)
-- **spring**: Spring Boot 자동 설정 + Actuator endpoint 제공
-- **example**: Spring 예제 모듈
+상세 문서: [docs/layer1-oss.md](docs/layer1-oss.md)
+
+한 줄 정의:
+
+> 여러 설정 소스에 흩어진 정책 값을 `PolicyKey<T>` 기준으로 타입 안전하게 읽고, 기본값·별칭·검증·변환·출처 정보를 포함해 해석해주는 범용 OSS
+
+모듈 책임은 다음과 같습니다.
+
+- **contracts**: `PolicyKey`, `PolicyResolver` 같은 외부 공개 계약
+- **resolver-core**: `ConfigSource`, 기본 소스(Env/Properties/Map), `DefaultPolicyResolver`, `ReloadablePolicyResolver`
+- **builder**: 조립(구성) 유틸 `PolicyConfigs`
+- **spring-boot-starter**: Spring Boot 자동 설정과 Actuator endpoint
+- **example**: Spring 사용 예시와 책임 경계 문서
+
+이 레포가 **하지 않는 것**:
+
+- 사용자/조직/테넌트 기반 정책 결정
+- rollout, A/B test, percentage split 같은 실행 정책 평가
+- 특정 서비스 전용 키나 도메인 규칙 하드코딩
+- Redis/DB/Kubernetes ConfigMap 같은 특정 저장소 강제
+- 중앙 운영 콘솔이나 원격 제어 plane 역할
+- 인증/인가 판단 자체
 
 ---
 
@@ -17,12 +35,12 @@
 
 ```gradle
 dependencies {
-    implementation("io.github.jho951:policy-config-config:1.0.0")
+    implementation("io.github.jho951:policy-config-builder:1.0.0")
     implementation("io.github.jho951:policy-config-spring-boot-starter:1.0.0")
 }
 ```
 
-> `policy-config-config` 는 내부적으로 `core` / `api` 를 포함합니다.
+> `policy-config-builder` 는 내부적으로 `resolver-core` / `contracts` 를 포함합니다.
 > `policy-config-spring-boot-starter` 는 Spring Boot 애플리케이션에서 `PolicyResolver` 빈을 자동 등록합니다.
 > `example` 모듈은 Maven Central에 배포하지 않습니다.
 
@@ -30,7 +48,7 @@ dependencies {
 
 이 저장소는 Maven Central 배포용 메타데이터와 서명 설정을 포함합니다.
 
-- `api`, `core`, `config`, `spring` 모듈만 배포 대상입니다.
+- `contracts`, `resolver-core`, `builder`, `spring-boot-starter` 모듈만 배포 대상입니다.
 - `example` 모듈은 실행 예제이므로 배포되지 않습니다.
 - `semantic-release` 워크플로는 `main`에 push되면 릴리즈 PR을 엽니다.
 - `publish-release` 워크플로는 릴리즈 PR이 머지되면 Maven Central 배포와 태그 생성, GitHub Release 생성을 수행합니다.
@@ -50,7 +68,7 @@ dependencies {
 ### 1) 타입이 있는 정책 키 정의
 
 ```java
-import com.policyconfig.api.PolicyKey;
+import com.policyconfig.contracts.PolicyKey;
 
 public final class MyPolicies {
     private MyPolicies() {}
@@ -79,8 +97,8 @@ public final class MyPolicies {
 ### 2) Resolver 구성 후 조회
 
 ```java
-import com.policyconfig.api.PolicyResolver;
-import com.policyconfig.config.PolicyConfigs;
+import com.policyconfig.contracts.PolicyResolver;
+import com.policyconfig.builder.PolicyConfigs;
 
 import java.util.Map;
 import java.util.UUID;
@@ -121,8 +139,8 @@ var reloadable = PolicyConfigs.builder()
 ### 5) Spring Boot에서 사용
 
 ```java
-import com.policyconfig.api.PolicyKey;
-import com.policyconfig.api.PolicyResolver;
+import com.policyconfig.contracts.PolicyKey;
+import com.policyconfig.contracts.PolicyResolver;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -154,7 +172,7 @@ policy.config.reloadable=true
 커스텀 변환기 빈은 다음처럼 등록할 수 있습니다.
 
 ```java
-import com.policyconfig.spring.PolicyConverterBinding;
+import com.policyconfig.springbootstarter.PolicyConverterBinding;
 import org.springframework.context.annotation.Bean;
 
 @Bean

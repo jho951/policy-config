@@ -1,8 +1,8 @@
 package com.policyconfig.example;
 
-import com.policyconfig.api.PolicyKey;
-import com.policyconfig.api.PolicyResolver;
-import com.policyconfig.spring.PolicyConfigEndpoint;
+import com.policyconfig.contracts.PolicyKey;
+import com.policyconfig.contracts.PolicyResolver;
+import com.policyconfig.springbootstarter.PolicyConfigEndpoint;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
@@ -17,7 +17,7 @@ class ExampleApplicationTest {
 
 	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
 		.withConfiguration(AutoConfigurations.of(
-			com.policyconfig.spring.PolicyConfigAutoConfiguration.class
+			com.policyconfig.springbootstarter.PolicyConfigAutoConfiguration.class
 		))
 		.withPropertyValues("policy.config.reloadable=true")
 		.withUserConfiguration(ExamplePolicyConfiguration.class);
