@@ -3,7 +3,7 @@
 [![Build](https://github.com/jho951/policy-config/actions/workflows/ci.yml/badge.svg)](https://github.com/jho951/policy-config/actions/workflows/ci.yml)
 [![Publish](https://github.com/jho951/policy-config/actions/workflows/publish.yml/badge.svg)](https://github.com/jho951/policy-config/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.jho951/policy-config-spring-boot-starter?label=maven%20central)](https://central.sonatype.com/search?q=io.github.jho951)
-[![License](https://img.shields.io/github/license/jho951/policy-config)](./License)
+[![License](https://img.shields.io/github/license/jho951/policy-config)](./LICENSE)
 [![Tag](https://img.shields.io/github/v/tag/jho951/policy-config)](https://github.com/jho951/policy-config/tags)
 
 `policy-config`는 1계층에서 **정책 엔진**이 아니라 **정책 값 조회/해석 OSS**입니다.
@@ -212,4 +212,4 @@ policy.config.reloadable=true
 
 ## 라이선스
 
-[Apache License 2.0](./License)
+Apache License 2.0. 자세한 내용은 [LICENSE](./LICENSE)를 보세요.

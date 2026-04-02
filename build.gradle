@@ -29,7 +29,7 @@ ext {
 
 allprojects {
     group = "io.github.jho951"
-    version = findProperty("version") ?: "1.0.0"
+    version = findProperty("version") ?: "1.0.1"
 
     repositories {
         mavenCentral()
