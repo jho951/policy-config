@@ -9,11 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/builder" />
-            <option value="$PROJECT_DIR$/contracts" />
-            <option value="$PROJECT_DIR$/example" />
-            <option value="$PROJECT_DIR$/resolver-core" />
-            <option value="$PROJECT_DIR$/spring-boot-starter" />
+            <option value="$PROJECT_DIR$/policy-config-builder" />
+            <option value="$PROJECT_DIR$/policy-config-contracts" />
+            <option value="$PROJECT_DIR$/policy-config-core" />
           </set>
         </option>
       </GradleProjectSettings>

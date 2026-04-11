@@ -1,42 +1,38 @@
 # policy-config
 
-`policy-config`는 Java 17 기반의 정책 값 조회 OSS 모듈입니다.
+`policy-config`는 Java 17 기반의 정책 키와 설정 소스 조회 OSS 모듈입니다.
+핵심 개념, 입력/출력 모델, 인터페이스 계약, 해석 규칙을 한 묶음으로 제공합니다.
 
 [![Build](https://github.com/jho951/policy-config/actions/workflows/build.yml/badge.svg)](https://github.com/jho951/policy-config/actions/workflows/build.yml)
-[![Publish](https://github.com/jho951/policy-config/actions/workflows/publish.yml/badge.svg)](https://github.com/jho951/policy-config/actions/workflows/publish.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.jho951/policy-config-spring-boot-starter?label=maven%20central)](https://central.sonatype.com/artifact/io.github.jho951/policy-config-spring-boot-starter)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.jho951/policy-config-core?label=maven%20central)](https://central.sonatype.com/search?q=jho951)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](./LICENSE)
+[![Tag](https://img.shields.io/github/v/tag/jho951/policy-config)](https://github.com/jho951/policy-config/tags)
 
 ## 공개 좌표
 
+- `io.github.jho951:policy-config-core`
 - `io.github.jho951:policy-config-contracts`
-- `io.github.jho951:policy-config-resolver-core`
-- `io.github.jho951:policy-config-builder`
-- `io.github.jho951:policy-config-spring-boot-starter`
 
-## SCM 메타데이터
+## 무엇을 제공하나
 
-- `github_org`: `jho951`
-- `github_repo`: `policy-config`
-- `pom.url`, `scm.connection`, `scm.developerConnection`은 위 두 키를 조합한다.
-
-## 포함 범위
-
-- 정책 값 조회 및 해석
-- `PolicyKey<T>` 기반 타입 안전 조회
-- Spring Boot 연동
+- `policy-config-contracts`: 공개 계약과 타입 안전한 정책 키 모델
+- `policy-config-core`: 설정 소스 조회, 타입 변환, 기본값/별칭/검증/갱신 처리
+- `policy-config-builder`: 여러 `ConfigSource`를 조립해 `PolicyResolver`를 만드는 빌더
 
 ## 빠른 시작
 
 ```gradle
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-    implementation("io.github.jho951:policy-config-spring-boot-starter:<version>")
+    implementation("io.github.jho951:policy-config-core:<version>")
+    implementation("io.github.jho951:policy-config-contracts:<version>")
+    implementation("io.github.jho951:policy-config-builder:<version>")
 }
 ```
 
-## 버전 정책
+## 문서
 
-- 기본 버전 SOT는 `gradle.properties`의 `version`입니다.
-- 릴리스 시에만 `releaseVersion`으로 임시 override합니다.
-- 태그 push 시 `releaseVersion`이 주입되어 Maven Central에 publish합니다.
-
-Apache License 2.0. 자세한 내용은 [LICENSE](./LICENSE)를 보세요.
+- [docs/README.md](docs/README.md)
