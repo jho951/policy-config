@@ -78,4 +78,3 @@
 - `builder`는 조립 유틸입니다.
 - `spring-boot-starter`는 프레임워크 어댑터입니다.
 - `policy-config` 자체는 범용 정책 값 조회 OSS로 남습니다.
-- 실제 정책 의미와 서비스 표준은 상위 계층이 가집니다.
