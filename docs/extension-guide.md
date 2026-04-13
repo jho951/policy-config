@@ -18,6 +18,7 @@ public final class DbConfigSource implements ConfigSource {
 - 파싱은 하지 않는다.
 - 실패 시에는 빈 맵을 반환하거나 명시적으로 예외를 던진다.
 - 서비스 전용 키 설계를 넣지 않는다.
+- DB, HTTP, Spring Bean 같은 운영 어댑터 구현은 별도 저장소나 애플리케이션에서 둔다.
 
 ## 새 변환기 추가
 
@@ -47,3 +48,4 @@ public final class DurationConverter implements PolicyValueConverter<Duration> {
 - 모듈 간 컴파일이 깨지지 않는지
 - `PolicyResolver`의 기본 해석이 바뀌지 않는지
 - 서비스 전용 규약에 묶이지 않는지
+- 새 모듈이 1계층 라이브러리 경계를 넘지 않는지

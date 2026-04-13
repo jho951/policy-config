@@ -105,9 +105,7 @@ public final class PolicyConfigs {
 		}
 
 		public PolicyResolver build() {
-			if (reloadable) {
-				return buildReloadable();
-			}
+			if (reloadable) return buildReloadable();
 			return new DefaultPolicyResolver(sources, converterRegistry);
 		}
 	}
